@@ -5,6 +5,23 @@ import { createClient } from "@/utils/supabase/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
+
+export async function signInWithLinkedIn() {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'linkedin_oidc',
+    options: {
+      redirectTo: 'http://localhost:3000/auth/callback',
+    },
+  })
+  
+  if (data.url) {
+    redirect(data.url) // use the redirect API for your server framework
+  }
+}
+
+
 export const signUpAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
   const password = formData.get("password")?.toString();
