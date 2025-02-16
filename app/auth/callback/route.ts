@@ -16,12 +16,7 @@ export async function GET(request: Request) {
     const { data, error } = await supabase.auth.exchangeCodeForSession(code);
 
     console.log("data : ", data)
-    
-    const cookieStore = await cookies(); 
-    cookieStore.set("sb-session", JSON.stringify(data.session), {
-      httpOnly: true,
-      maxAge: 60 * 60 * 24 * 7, // 7 days
-    });
+
   }
   
 
