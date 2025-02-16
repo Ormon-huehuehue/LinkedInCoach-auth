@@ -7,6 +7,7 @@ import { redirect } from "next/navigation";
 
 
 export async function signInWithLinkedIn() {
+  "use server"
   const supabase = await createClient();
 
   const { data, error } = await supabase.auth.signInWithOAuth({
